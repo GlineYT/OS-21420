@@ -1,0 +1,74 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36" version="26.2.9">
+  <diagram name="Страница-1" id="tiKyUiJxjT8UogsuJ0qN">
+    <mxGraphModel dx="1156" dy="663" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="HShqSbLlW67sV2xmtvrW-1" value="САЙТ ЗА ВХОД" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="10" y="10" width="210" height="150" as="geometry">
+            <mxRectangle x="10" y="10" width="130" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HShqSbLlW67sV2xmtvrW-3" value="ПОТРЕБИТЕЛСКО ИМЕ&lt;div&gt;ПАРОЛА&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="HShqSbLlW67sV2xmtvrW-1">
+          <mxGeometry y="20" width="210" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="HShqSbLlW67sV2xmtvrW-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="530" y="60" as="sourcePoint" />
+            <mxPoint x="630" y="60" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HShqSbLlW67sV2xmtvrW-17" value="данни за вход" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="HShqSbLlW67sV2xmtvrW-16">
+          <mxGeometry x="-0.1533" y="-1" relative="1" as="geometry">
+            <mxPoint x="-2" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HShqSbLlW67sV2xmtvrW-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="370" y="130" as="sourcePoint" />
+            <mxPoint x="220" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HShqSbLlW67sV2xmtvrW-21" value="отговор" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="HShqSbLlW67sV2xmtvrW-20">
+          <mxGeometry x="0.1911" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HShqSbLlW67sV2xmtvrW-5" value="login.js" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="30" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="HShqSbLlW67sV2xmtvrW-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="220" y="60" as="sourcePoint" />
+            <mxPoint x="370" y="65" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="295" y="60" />
+              <mxPoint x="295" y="65" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HShqSbLlW67sV2xmtvrW-8" value="данни за вход" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="HShqSbLlW67sV2xmtvrW-7">
+          <mxGeometry x="-0.0481" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HShqSbLlW67sV2xmtvrW-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="HShqSbLlW67sV2xmtvrW-9" target="HShqSbLlW67sV2xmtvrW-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="590" y="140" />
+              <mxPoint x="590" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HShqSbLlW67sV2xmtvrW-19" value="отговор" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="HShqSbLlW67sV2xmtvrW-18">
+          <mxGeometry x="0.2033" y="-1" relative="1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HShqSbLlW67sV2xmtvrW-9" value="server.js" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="630" y="45" width="177" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

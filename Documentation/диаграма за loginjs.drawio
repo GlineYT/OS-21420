@@ -1,0 +1,117 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36" version="26.2.9">
+  <diagram name="Страница-1" id="jYpxVhu7msDJZJU2WbMo">
+    <mxGraphModel dx="1321" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="kiYzoSFmRX8breV_LZhM-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kiYzoSFmRX8breV_LZhM-2" target="kiYzoSFmRX8breV_LZhM-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-2" value="сайт за логин" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;notch=0;" vertex="1" parent="1">
+          <mxGeometry y="45" width="110" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kiYzoSFmRX8breV_LZhM-3" target="kiYzoSFmRX8breV_LZhM-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-3" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;Потребителски данни&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;Потребителско име = &lt;span style=&quot;background-color: transparent;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;document.getElementById(&quot;firstName&quot;).value;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); font-family: Helvetica;&quot;&gt;Парола =&amp;nbsp;&lt;/span&gt;&amp;nbsp;document.getElementById(&quot;password&quot;).value;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="160" y="50" width="430" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kiYzoSFmRX8breV_LZhM-10" target="kiYzoSFmRX8breV_LZhM-20">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="710" y="230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-27" value="да?" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="kiYzoSFmRX8breV_LZhM-25">
+          <mxGeometry x="-0.7398" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-28" value="потребителски данни във json формат" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="kiYzoSFmRX8breV_LZhM-25">
+          <mxGeometry x="-0.2501" y="1" relative="1" as="geometry">
+            <mxPoint x="69" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-10" value="попълнени ли са полетата?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="170" width="110" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-17" value="съобщение за&amp;nbsp;&lt;div&gt;непопълнени полета&lt;/div&gt;" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;flipH=1;notch=0;" vertex="1" parent="1">
+          <mxGeometry y="182" width="170" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-20" value="server.js" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;notch=0;" vertex="1" parent="1">
+          <mxGeometry x="727" y="195" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="kiYzoSFmRX8breV_LZhM-10" target="kiYzoSFmRX8breV_LZhM-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-26" value="не?" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="220" y="218" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-31" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kiYzoSFmRX8breV_LZhM-29" target="kiYzoSFmRX8breV_LZhM-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-29" value="отговор от server.js" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;flipH=1;notch=0;" vertex="1" parent="1">
+          <mxGeometry x="710" y="320" width="117" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-33" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kiYzoSFmRX8breV_LZhM-30" target="kiYzoSFmRX8breV_LZhM-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-34" value="да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="kiYzoSFmRX8breV_LZhM-33">
+          <mxGeometry x="-0.0604" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-40" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kiYzoSFmRX8breV_LZhM-30" target="kiYzoSFmRX8breV_LZhM-39">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-44" value="не" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="kiYzoSFmRX8breV_LZhM-40">
+          <mxGeometry x="0.0233" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-30" value="отговора грешка ли е?" style="rhombus;whiteSpace=wrap;html=1;shadow=0;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="430" y="306.25" width="100.75" height="97.5" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-36" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kiYzoSFmRX8breV_LZhM-32" target="kiYzoSFmRX8breV_LZhM-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-38" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kiYzoSFmRX8breV_LZhM-32" target="kiYzoSFmRX8breV_LZhM-37">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-32" value="съобщение за грешка" style="whiteSpace=wrap;html=1;shadow=0;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="430" y="500" width="97.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-35" value="терминала" style="shape=singleArrow;whiteSpace=wrap;html=1;arrowWidth=0.4;arrowSize=0.4;shadow=0;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="747" y="485" width="80" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-37" value="браузър" style="shape=singleArrow;whiteSpace=wrap;html=1;arrowWidth=0.4;arrowSize=0.4;shadow=0;dashed=0;flipH=1;" vertex="1" parent="1">
+          <mxGeometry y="485" width="80" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-42" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kiYzoSFmRX8breV_LZhM-39" target="kiYzoSFmRX8breV_LZhM-41">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-43" value="не" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="kiYzoSFmRX8breV_LZhM-42">
+          <mxGeometry x="0.0825" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-46" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kiYzoSFmRX8breV_LZhM-39" target="kiYzoSFmRX8breV_LZhM-45">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-47" value="да" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="kiYzoSFmRX8breV_LZhM-46">
+          <mxGeometry x="-0.3946" relative="1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-39" value="потребителеските данни верни ли са?" style="rhombus;whiteSpace=wrap;html=1;shadow=0;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="230" y="297.5" width="114.26" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-41" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;съобщение за неправилно потребителски име и парола&lt;/font&gt;" style="shape=singleArrow;whiteSpace=wrap;html=1;arrowWidth=0.4;arrowSize=0.4;shadow=0;dashed=0;flipH=1;" vertex="1" parent="1">
+          <mxGeometry y="308.75" width="170" height="92.5" as="geometry" />
+        </mxCell>
+        <mxCell id="kiYzoSFmRX8breV_LZhM-45" value="отпрати потребителя към профилната му страница" style="whiteSpace=wrap;html=1;shadow=0;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="208.57" y="440" width="157.13" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

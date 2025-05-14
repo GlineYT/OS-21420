@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../Izvunklasni/HTML/UKTC-webiste"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "DRAGSTER"
+	}
+}

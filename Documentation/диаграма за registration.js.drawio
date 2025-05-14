@@ -1,0 +1,94 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36" version="26.2.8">
+  <diagram name="Страница-1" id="5YEgut14-etFqZxIC_qB">
+    <mxGraphModel dx="1156" dy="663" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-64" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="401.25" y="280" as="sourcePoint" />
+            <mxPoint x="734.5" y="330" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="400" y="280" />
+              <mxPoint x="400" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-69" value="Данните се пращат като json обект" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="oh9eQlsX34iOXUxyGE5B-64">
+          <mxGeometry x="-0.463" relative="1" as="geometry">
+            <mxPoint x="128" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-16" value="" style="ellipse;whiteSpace=wrap;html=1;align=center;aspect=fixed;fillColor=none;strokeColor=none;resizable=0;perimeter=centerPerimeter;rotatable=0;allowArrows=0;points=[];outlineConnect=1;" vertex="1" parent="1">
+          <mxGeometry x="385" y="560" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-25" value="" style="ellipse;whiteSpace=wrap;html=1;align=center;aspect=fixed;fillColor=none;strokeColor=none;resizable=0;perimeter=centerPerimeter;rotatable=0;allowArrows=0;points=[];outlineConnect=1;" vertex="1" parent="1">
+          <mxGeometry x="425" y="470" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-42" value="" style="ellipse;whiteSpace=wrap;html=1;align=center;aspect=fixed;fillColor=none;strokeColor=none;resizable=0;perimeter=centerPerimeter;rotatable=0;allowArrows=0;points=[];outlineConnect=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="490" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-50" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="oh9eQlsX34iOXUxyGE5B-48" target="oh9eQlsX34iOXUxyGE5B-49">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-48" value="сайт за регистрация" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" width="250" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-52" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="oh9eQlsX34iOXUxyGE5B-49" target="oh9eQlsX34iOXUxyGE5B-51">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-49" value="потребителски данни:&lt;div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; const username = document.getElementById(&quot;firstName&quot;).value;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; const password = document.getElementById(&quot;password&quot;).value;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; const birthday = document.getElementById(&quot;birthdayDate&quot;).value;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; const email = document.getElementById(&quot;emailAddress&quot;).value;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; const phone = document.getElementById(&quot;phoneNumber&quot;).value;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; const gender = document.getElementById(&quot;femaleGender&quot;).checked ? &quot;Жена&quot; : &quot;Мъж&quot;;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="130" y="40" width="530" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-51" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;Потребителски данни&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;username&amp;nbsp;&amp;nbsp;&lt;br&gt;password&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;birtday&amp;nbsp;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;email&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;phone&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;gender&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="322.5" y="210" width="145" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-63" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;strokeWidth=2;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;notch=0;" vertex="1" parent="1">
+          <mxGeometry x="690" y="300" width="130" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-68" value="server.js" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="710" y="320" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-74" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="oh9eQlsX34iOXUxyGE5B-71" target="oh9eQlsX34iOXUxyGE5B-73">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-75" value="отговор" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="oh9eQlsX34iOXUxyGE5B-74">
+          <mxGeometry x="0.5217" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-71" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;strokeWidth=2;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;notch=0;direction=west;" vertex="1" parent="1">
+          <mxGeometry x="697" y="350" width="130" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-72" value="server.js" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="750" y="370" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-77" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="oh9eQlsX34iOXUxyGE5B-73" target="oh9eQlsX34iOXUxyGE5B-76">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-78" value="при успех" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="oh9eQlsX34iOXUxyGE5B-77">
+          <mxGeometry x="0.2611" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-80" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="oh9eQlsX34iOXUxyGE5B-73" target="oh9eQlsX34iOXUxyGE5B-79">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-81" value="неуспех&lt;div&gt;или грешка&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="oh9eQlsX34iOXUxyGE5B-80">
+          <mxGeometry x="-0.1963" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-73" value="отговор" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="345" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-76" value="пренасочване към страница за влизане" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="355" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oh9eQlsX34iOXUxyGE5B-79" value="извежда грешката от отговора" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="490" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
