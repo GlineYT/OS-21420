@@ -29,31 +29,70 @@
           </div>
         </div>
       </nav>
-    
-      <div class="container container-profile">
-        <div class="profile-header">ПРОФИЛНА ИНФОРМАЦИЯ</div>
-    
-        <table class="table table-bordered table-profile">
-          <tbody>
-            <tr>
-              <th>Потребителско име:</th>
-              <td id="profile-username">marko</td>
-            </tr>
-            <tr>
-              <th>Имейл:</th>
-              <td id="profile-email">21420@uktc-bg.com</td>
-            </tr>
-            <tr>
-              <th>Телефон:</th>
-              <td id="profile-phone">+359 888 123 456</td>
-            </tr>
-          </tbody>
-        </table>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>Потребителско име:</th>
+            <td id="profile-username">Зареждане...</td>
+          </tr>
+          <tr>
+            <th>Имейл:</th>
+            <td id="profile-email">Зареждане...</td>
+          </tr>
+          <tr>
+            <th>Телефон:</th>
+            <td id="profile-phone">Зареждане...</td>
+          </tr>
+          <tr>
+            <th>Дата на създаване:</th>
+            <td id="profile-creation">Зареждане...</td>
+          </tr>
+        </tbody>
+      </table>
+      
+
+          <div class="col-md-4">
+            <div class="profile-header">РЕДАКТИРАНЕ НА ПРОФИЛ</div>
+            <button id="logoutBtn" class="btn btn-custom mt-3">Изход</button>
+            <button id="deleteAccountBtn" class="btn btn-custom mt-3">Изтрий акаунта</button>
+
+          </div>
+        </div>
       </div>
+
+
+   
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch('http://127.0.0.1:3000/profiledata', {
+          method: "GET",
+          credentials: 'include'
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (!data.success) {
+            console.error('[ГРЕШКА] Неуспешно зареждане на профил:', data.message);
+            return;
+          }
     
+          const user = data.user;
+          document.getElementById('profile-username').innerText = user.uname;
+          document.getElementById('profile-email').innerText = user.email;
+          document.getElementById('profile-phone').innerText = user.phone || 'Няма';
+          document.getElementById('profile-creation').innerText = user.created;
+        })
+        .catch(error => {
+          console.error('[ГРЕШКА] Грешка при зареждане на профилната информация:', error);
+        });
+      });
+    </script>
+    
+        
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="/JS/sessioncheck.js"></script>
+<script src="/JS/loginsignup/logout.js"></script>
+<script src="/JS/account/delete.js"></script>
 </body>
 
 </html>

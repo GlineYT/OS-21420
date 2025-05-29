@@ -31,7 +31,10 @@
     border: 1px solid #FF6600;
     border-radius: 12px;
     overflow: hidden;
-  }
+    width: 100%;
+    }
+
+  
 
   .table th {
     background-color: #FF6600;
@@ -46,6 +49,12 @@
 
   .container-profile {
     padding-bottom: 50px;
-    position: absolute;
-    right: 45%;
+  }
+
+  .btn-custom {
+    background-color: #FF6600;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
   }

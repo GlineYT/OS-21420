@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Launch server.js",
+        "skipFiles": ["<node_internals>/**"],
+        "program": "/home/kingmarkoxiv/Плот/UKTC/PROGRAMIRANE/11 клас/Курсови проекти/DRAGSTER/JS/loginsignup/server.jss"
+      }
+    ]
+  }
+  

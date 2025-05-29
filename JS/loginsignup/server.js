@@ -7,49 +7,21 @@ const jwt = require('jsonwebtoken');
 const morgan = require('morgan');
 const app = express();
 app.use(express.json());
+app.use(session({ secret: 'secret', resave: false, saveUninitialized: false }));
+const passport = require('passport');
+app.use(passport.initialize());
+app.use(passport.session());
+const db = require('../db/connection.js'); //! Връзка с базата данни
+const profileDataRoute = require('../profiledata.js');
+var uname;
 
-//* Включи CORS
-
-const whitelist = [
-    "http://127.0.0.1:5500",
-    "http://127.0.0.1:3000",
-    "http://localhost:5500",
-    "http://localhost:3000"
-];
-
-const corsOptions = {
-    origin: function (origin, callback) {
-        if (!origin || whitelist.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
-    credentials: true
-};
-
-app.use(cors(corsOptions));
-
-
-app.use(session({
-    secret: 'superSecretSessionKey',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        maxAge: 24 * 60 * 60 * 10000,
-        httpOnly: true,
-        secure: false, 
-        sameSite: 'Lax' 
-    }
+app.use(cors({
+  origin: "http://127.0.0.1:5500",
+  credentials: true 
 }));
 
+
 //!Връзка със базата данни
-const db = mysql.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    password: "root",
-    database: "DRAGSTER",
-});
 
 db.connect((err) => {
     if (err) {
@@ -60,76 +32,77 @@ db.connect((err) => {
 });
 
 //? Маршрут за логин
-app.post("/login", (req, res) => {
-    const { username, password } = req.body;
-
-    if (!username || !password) {
-        return res.status(400).json({ success: false, message: "Попълнете всички полета!" });
+app.use(session({
+    secret: 'superSecretSessionKey',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 24 * 60 * 60 * 1000, 
+        httpOnly: true,
+        secure: false,               
+        sameSite: 'None'             
     }
-    //* SQL заявка за проверка на потребител
-    // ! Използваме параметризирани заявки, за да избегнем SQL инжекции
-    db.query("SELECT * FROM users WHERE uname = ? OR email = ?", [username, username], (err, results) => {
-        if (err) {
-            console.error("[ГРЕШКА] Грешка при проверка на потребител:", err);
-            return res.status(500).json({ success: false, message: "[ГРЕШКА] Грешка при вход!" });
+}));
+
+
+const LocalStrategy = require('passport-local').Strategy;
+
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+      db.query(
+        `SELECT ID, uname, EMAIL AS email, PHONE AS phone, CREATED_AT AS created, password 
+         FROM users WHERE uname = ? OR email = ?`,
+        [username, username],
+        (err, results) => {
+          if (err) return done(err);
+          const user = results[0];
+          if (!user || user.password !== password) {
+            return done(null, false, { message: '[ГРЕШКА] Неправилна парола/потребителско име.' });
+          }
+          return done(null, user); 
         }
-
-        if (results.length === 0) {
-            return res.status(401).json({ success: false, message: "[ГРЕШКА] Грешно потребителско име или парола!" });
-        }
-
-        const user = results[0];
-        // ! Проверка на паролата
-        if (user.password !== password) {
-            return res.status(401).json({ success: false, message: "[ГРЕШКА] Грешна парола!" });
-        }
-
-        // ! Запазваме потребителската сесия
-        req.session.user = {
-            id: user.ID,           // ✅ uppercase column name
-            uname: user.uname,     // ✅ assuming lowercase is correct here
-            email: user.EMAIL      // ✅ uppercase column name
-        };
-        
-        console.log("[УСПЕХ] Успешен вход за потребител:", user.uname); 
-        console.log("[УСПЕХ] Със следната сесия:", req.session.user);
-
-        
-        res.json({ success: true, message: "[УСПЕХ] Успешен вход!" });
-    });
+      );
+    }
+  ));
+  
+//! Сериализация и десериализация на потребителя
+passport.serializeUser((user, done) => done(null, user.ID));
+passport.deserializeUser((id, done) => {
+  db.query("SELECT * FROM users WHERE ID = ?", [id], (err, results) => {
+    if (err) return done(err);
+    if (!results || results.length === 0) {
+      return done(null, false);
+    }
+    return done(null, results[0]);
+  });
 });
 
+//? Изпращане на отговор на клиента
+app.post("/login", function (req, res, next) {
+    passport.authenticate("local", function (err, user, info) {
+      if (err) return res.status(500).json({ success: false, message: "[ГРЕШКА] Проблем със сървъра" });
+      if (!user) return res.status(401).json({ success: false, message: info.message });
+  
+      req.logIn(user, function (err) {
+        if (err) return res.status(500).json({ success: false, message: "[ГРЕШКА] Грешка във влизането." });
 
+        req.session.username = user.uname;
+        req.session.email = user.email;
+        req.session.phone = user.phone;
+        req.session.created = user.CREATED_AT;
+        uname = user.uname; //& Запазване на потребителското име в променлива
 
-//? Маршрут за регистрация
-app.post("/register", (req, res) => {
-    const { username, password, birthday, email, phone, gender } = req.body;
-
-    console.log(express.json()); //! Показва, че е включен парсърът на JSON
-    
-    if (!username || !password || !email || !birthday) { //! Проверка за празни полета
-        return res.status(400).json({ message: "Попълнете всички задължителни полета!" });
-    }
-
-    //* SQL заявка за вкарване на нов потребител
-    db.query(
-        "INSERT INTO users (uname, password, birthday, email, phone, gender) VALUES (?, ?, ?, ?, ?, ?)", //& SQL заявка
-        [username, password, birthday, email, phone, gender],
-        (err, result) => {
-            if (err) {
-                console.error("[ГРЕШКА] Грешка при регистрация:", err); //! Показва грешката в конзолата
-                return res.status(500).json({ message: "[ГРЕШКА] Грешка при регистрация!" }); //! Връща грешка при регистрация
-            }
-            res.status(201).json({ message: "[УСПЕХ]  Успешна регистрация!" }); //! Връща успешна регистрация
-        }
-    );
-});
-//? Маршрут за проверка на сесията
-app.get("/sessioncheck", (req, res) => {
-    if (req.session.user) {
+        return res.json({ success: true, message: "[УСПЕХ] Успешно влизане." });
+      });
+    })(req, res, next);
+  });
+  
+  //? Маршрут за проверка на сесията
+  app.get("/sessioncheck", (req, res) => {
+    if (req.isAuthenticated && req.isAuthenticated()) {
         res.json({
             loggedIn: true,
-            user: req.session.user // !Send session user data if logged in
+            user: req.user
         });
     } else {
         res.json({
@@ -141,8 +114,89 @@ app.get("/sessioncheck", (req, res) => {
 
   
 
+//? Маршрут за регистрация
+app.post("/register", (req, res) => {
+  const { username, password, birthday, email, phone, gender } = req.body;
+
+  if (!username || !password || !email || !birthday) {
+      return res.status(400).json({ message: "Попълнете всички задължителни полета!" });
+  }
+
+  //& Проверка дали потребителското име вече съществува
+  db.query("SELECT uname FROM users WHERE uname = ?", [username], (err, results) => {
+      if (err) {
+          console.error("[ГРЕШКА] Грешка при търсене на потребител:", err);
+          return res.status(500).json({ message: "[ГРЕШКА] Вътрешна грешка при проверка!" });
+      }
+
+      if (results.length > 0) {
+          //! Потребителското име вече съществува
+          return res.status(409).json({ message: "[ГРЕШКА] Това потребителско име вече съществува!" });
+      }
+
+      //* Ако името е свободно, извършва се регистрацията
+      db.query(
+          "INSERT INTO users (uname, password, birthday, email, phone, gender) VALUES (?, ?, ?, ?, ?, ?)",
+          [username, password, birthday, email, phone, gender],
+          (err, result) => {
+              if (err) {
+                  console.error("[ГРЕШКА] Грешка при регистрация:", err);
+                  return res.status(500).json({ message: "[ГРЕШКА] Неуспешна регистрация!" });
+              }
+
+              res.status(201).json({ message: "[УСПЕХ] Успешна регистрация!" });
+          }
+      );
+  });
+});
+
+//? Маршрут за извеждане на потребителски данни
+app.use('/profiledata', profileDataRoute); 
+
+//? Маршрут за изход
+app.get('/logout', (req, res) => {
+  req.sessionStore.clear(err => {
+      if (err) {
+          console.error("[ГРЕШКА] Грешка при изчистване на сесиите:", err);
+          return res.status(500).json({ success: false, message: '[ГРЕШКА] Неуспешно изчистване на сесиите' });
+      }
+
+      res.clearCookie('connect.sid');
+      res.json({ success: true, message: '[УСПЕХ] Всички сесии изчистени. Потребителят е излязъл.' });
+      console.log("[УСПЕХ] Изчистени сесии. Потребителят е излязъл.");
+  });
+});
+
+app.get('/test-session', (req, res) => {
+    res.json({ session: req.session });
+});
+  
+
+//! Маршрут за изтриване на потребител
+
+app.post('/deleteaccount', (req, res) => {
+  const username = uname; //& Вземане на потребителското име от сесията
+
+  if (!username) {
+      return res.status(401).json({ success: false, message: '[ГРЕШКА] Няма активна сесия за изтриване.' });
+  }
+
+  db.query("DELETE FROM users WHERE uname = ?", [username], (err, result) => {
+      if (err) {
+          console.error("[ГРЕШКА] Грешка при изтриване на акаунт:", err);
+          return res.status(500).json({ success: false, message: '[ГРЕШКА] Неуспешно изтриване на акаунта.' });
+      }
+
+      req.session.destroy(() => {
+          res.clearCookie('connect.sid');
+          res.json({ success: true, message: '[УСПЕХ] Акаунтът беше успешно изтрит.' });
+      });
+  });
+});
+
+
 const PORT = 3000;
 app.listen(PORT, () => {
-    console.log(`[ИНФО] Сървъра слуша на http://localhost:${PORT}`);
+    console.log(`[ИНФО] Сървъра слуша на http://127.0.0.1:${PORT}`);
 });
 

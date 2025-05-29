@@ -10,14 +10,15 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
         //? Изпращане на заявка към сървъра
-        fetch("http://localhost:3000/login", {
+        fetch("http://127.0.0.1:3000/login", {
             method: "POST",
+            credentials: "include", 
             headers: {
-                //? Задаване на заглавие за изпращане на JSON
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({ username, password })
         })
+        
         //^ Обработка на отговора
         .then(response => response.json())
         .then(data => {

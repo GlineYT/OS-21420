@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const phone = document.getElementById("phoneNumber").value;
         const gender = document.getElementById("femaleGender").checked ? "Жена" : "Мъж";
 
-        const userData = { //! Обект с данни за потребителя
+        const userData = {
             username,
             password,
             birthday,
@@ -19,27 +19,30 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         try {
-            const response = await fetch("http://localhost:3000/register", { // !await
-                method: "POST", //? POST метод
-                 headers: {
-                    "Content-Type": "application/json" //? Подава данни в JSON формат, като дефинира заглавка
+            const response = await fetch("http://127.0.0.1:3000/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
                 },
-                body: JSON.stringify(userData) 
+                body: JSON.stringify(userData)
             });
 
-            console.log("[ИНФО] Заявката е:", userData);
+            const result = await response.json();
 
-            const result = await response.json(); //!  await
-
-            if (response.ok) {
+            if (response.status === 201) {
                 console.log("[УСПЕХ] Регистрацията беше успешна!");
                 window.location.href = "/HTML/login/login.html";
+            } else if (response.status === 409) {
+                alert(result.message); 
+            } else if (response.status === 400) {
+                alert("Моля, попълнете всички задължителни полета.");
             } else {
                 console.error("[ГРЕШКА] " + result.message);
+                alert("[ГРЕШКА] " + result.message);
             }
         } catch (error) {
-            console.error("[ГРЕШКА] Грешка при регистрацията: ", error);
-            console.error("[ГРЕШКА] Възникна проблем със сървъра.");
+            console.error("[ГРЕШКА] Грешка при регистрацията:", error);
+            alert("[ГРЕШКА] Възникна проблем със сървъра.");
         }
     });
 });
