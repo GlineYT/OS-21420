@@ -14,11 +14,12 @@ app.use(passport.session());
 const db = require('../db/connection.js'); //! Връзка с базата данни
 const profileDataRoute = require('../profiledata.js');
 var uname;
+var uid;
 
 app.use(cors({
   origin: "http://127.0.0.1:5500",
   credentials: true 
-}));
+}));  
 
 
 //!Връзка със базата данни
@@ -111,9 +112,6 @@ app.post("/login", function (req, res, next) {
     }
 });
 
-
-  
-
 //? Маршрут за регистрация
 app.post("/register", (req, res) => {
   const { username, password, birthday, email, phone, gender } = req.body;
@@ -173,7 +171,6 @@ app.get('/test-session', (req, res) => {
   
 
 //! Маршрут за изтриване на потребител
-
 app.post('/deleteaccount', (req, res) => {
   const username = uname; //& Вземане на потребителското име от сесията
 
@@ -193,6 +190,160 @@ app.post('/deleteaccount', (req, res) => {
       });
   });
 });
+//? Промяна на потребителско име
+app.post("/change-username", (req, res) => {
+  const { newUsername } = req.body;
+  const currentUsername = uname; //& Вземане на текущото потребителско име от сесията
+
+  if (!newUsername) {
+    return res.status(400).json({ message: "Моля, въведете ново потребителско име." });
+  }
+
+  db.query("SELECT * FROM users WHERE uname = ?", [newUsername], (err, results) => {
+    if (err) {
+      console.error("[ГРЕШКА] При търсене на потребител:", err);
+      return res.status(500).json({ message: "Грешка при търсенето." });
+    }
+
+    if (results.length > 0) {
+      return res.status(409).json({ message: "Потребителското име вече съществува." });
+    }
+
+    db.query("UPDATE users SET uname = ? WHERE uname = ?", [newUsername, currentUsername], (err2, result2) => {
+      if (err2) {
+        console.error("[ГРЕШКА] При актуализиране на потребителското име:", err2);
+        return res.status(500).json({ message: "Грешка при промяна на потребителското име." });
+      }
+
+      req.session.destroy((err) => {
+        if (err) {
+          console.error("Грешка при изтриване на сесията:", err);
+        }
+      });
+      res.status(200).json({ message: "Потребителското име е променено. Моля, влезте отново." });
+      });
+    });
+  });
+
+//! Маршрут за смяна на парола
+app.post("/change-password", (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+
+  if (!oldPassword || !newPassword) {
+    return res.status(400).json({ message: "Моля, попълнете и двете полета." });
+  }
+
+  const currentUsername = uname; 
+
+  db.query("SELECT password FROM users WHERE uname = ?", [currentUsername], (err, results) => {
+    if (err) {
+      console.error("Грешка при четене от базата:", err);
+      return res.status(500).json({ message: "[ГРЕШКА] Грешка в сървъра." });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ message: "[ГРЕШКА] Потребителят не е намерен." });
+    }
+
+    const actualPassword = results[0].password;
+
+    if (oldPassword !== actualPassword) {
+      return res.status(403).json({ message: "[ГРЕШКА] Старата парола е грешна." });
+    }
+
+    db.query("UPDATE users SET password  = ? WHERE uname = ?", [newPassword, currentUsername], (err2) => {
+      if (err2) {
+        console.error("Грешка при промяна на паролата:", err2);
+        return res.status(500).json({ message: "[ГРЕШКА] Неуспешна смяна на паролата." });
+      }
+
+      req.session.destroy((err3) => {
+        if (err3) console.error("Session destroy error:", err3);
+        res.status(200).json({ message: "[УСПЕХ] Паролата е променена успешно. Моля, влезте отново." });
+      });
+    });
+  });
+});
+
+app.post("/get-comments", (req, res) => {
+  const articleUrl = req.body.url;
+
+  if (!articleUrl) {
+    return res.status(400).json({ message: "Невалиден URL" });
+  }
+
+  const getArticleIdQuery = "SELECT article_id FROM NEWS WHERE link = ?"; // <-- this line was missing
+  db.query(getArticleIdQuery, [articleUrl], (err, result) => {
+    if (err || result.length === 0) {
+      return res.status(404).json([]);
+    }
+
+    const articleId = result[0].article_id;
+
+    const getCommentsQuery = "SELECT USERNAME, COMMENT FROM COMMENTS WHERE article_id = ? ORDER BY DATE_POSTED DESC";
+    db.query(getCommentsQuery, [articleId], (err2, comments) => {
+      if (err2) {
+        console.error("Грешка при заявка за коментари:", err2);
+        return res.status(500).json([]);
+      }
+
+      res.status(200).json(comments);
+    });
+  });
+});
+
+//? Маршрут за извеждане на коментари за администратор
+
+app.get("/get-all-comments", (req, res) => {
+  const query = `
+    SELECT 
+      c.COMMENT_ID,
+      c.USERNAME,
+      c.COMMENT,
+      c.DATE_POSTED,
+      n.link AS article_link,
+      n.title AS article_title
+    FROM COMMENTS c
+    JOIN NEWS n ON c.ARTICLE_ID = n.article_id
+    ORDER BY c.DATE_POSTED DESC
+  `;
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("[ГРЕШКА] Грешка при извеждането на коментари:", err);
+      return res.status(500).json({ error: "[ГРЕШКА] Грешка с базата данни" });
+    }
+    res.json(results);
+  });
+});
+//! Маршрут за изтриване на коментар
+app.delete("/delete-comment/:id", (req, res) => {
+  const commentId = req.params.id;
+  const query = "DELETE FROM COMMENTS WHERE COMMENT_ID = ?";
+  
+  db.query(query, [commentId], (err, result) => {
+    if (err) {
+      console.error("Error deleting comment:", err);
+      res.status(500).send("Грешка при изтриване.");
+    } else {
+      res.sendStatus(200);
+    }
+  });
+});
+
+//? Маршрут за извеждане на потребители за администратор
+app.get("/getusers", (req, res) => {
+  db.query("SELECT * FROM users", (err, results) => {
+    if (err) {
+      console.error("Error fetching users:", err);
+      return res.status(500).json({ error: "Database error" });
+    }
+    res.json(results);
+  });
+});
+
+
+
 
 
 const PORT = 3000;

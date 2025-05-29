@@ -5,6 +5,7 @@ const db = mysql.createConnection({
     user: "root",
     password: "root",
     database: "DRAGSTER",
+      charset: "utf8mb4"
 });
 
 module.exports = db;
