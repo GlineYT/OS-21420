@@ -1,4 +1,7 @@
 const currentUrl = window.location.href;
+//* Remve any GET parameters from the URL
+const urlWithoutParams = currentUrl.split('?')[0];
+window.history.replaceState({}, document.title, urlWithoutParams); // Update the URL without GET parameters
 console.log(window.location.href); // Check what’s *really* being sent
 
 

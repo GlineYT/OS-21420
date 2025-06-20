@@ -1,7 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const mysql = require('mysql2');
-const db = require('./db/connection.js'); //& Връзка с базата данни
+const db = mysql.createConnection({
+  host: "127.0.0.1",
+  user: "root",
+  password: "root",
+  database:"DRAGSTER",
+  charset: "utf8mb4"
+});
+
 
 
 router.get('/', (req, res) => {

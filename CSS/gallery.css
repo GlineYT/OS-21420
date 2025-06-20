@@ -5,9 +5,15 @@
 img {
     margin: 10px;
     margin-top: -10px;
+    width: 40% !important;
+    height: 400px ;
 }
 
 .navbar-custom {
     margin-bottom: 10px;
 }
 
+.ms-2{
+    height: 32px !important;
+    width: 32px !important;
+}

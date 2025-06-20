@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: DRAGSTER
+    volumes:
+      - ./DOCKER/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+    command: --wait_timeout=28800 --interactive_timeout=28800
+
+  backend:
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASS: root
+      DB_NAME: DRAGSTER
+      DB_PORT: 3306
+    networks:
+      - backend-network
+
+networks:
+  backend-network:
+    driver: bridge

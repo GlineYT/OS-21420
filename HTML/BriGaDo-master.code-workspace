@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../../../Izvunklasni/HTML/BriGaDo-master"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "BriGaDo-master"
+	}
+}

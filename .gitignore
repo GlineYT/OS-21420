@@ -1021,3 +1021,5 @@ JS/loginsignup/node_modules/vary/index.js
 JS/loginsignup/node_modules/vary/LICENSE
 JS/loginsignup/node_modules/vary/package.json
 JS/loginsignup/node_modules/vary/README.md
+JS/loginsignup/node_modules/*
+node_modules/*

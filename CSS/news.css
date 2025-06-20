@@ -63,7 +63,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
-  }
+}
   
   .comment-box {
     border: 2px solid #333;
@@ -107,3 +107,59 @@ body {
     transform: scale(0.98);
   }
   
+  .articles-container {
+    display: flex;
+    gap: 20px; /* Adds space between cards */
+    flex-wrap: wrap; /* Allows cards to wrap on smaller screens */
+  }
+  
+  .article-select {
+    flex: 0 0 auto; /* Don't grow, don't shrink, auto basis */
+  }
+  
+  /* Optional: Responsive adjustment for smaller screens */
+  @media (max-width: 768px) {
+    .articles-container {
+      flex-direction: column;
+    }
+  }
+
+  /* Center the article contents, to the center of the page, and wihth 10% margins on either side, applicable to p and img tags */
+  .article-content {
+    text-align: center;
+  }
+  .article-content p {
+    margin: 0 10% 20px; /* Adds space below paragraphs */
+    justify-content: center; /* Centers text */
+    line-height: 1.6; /* Improves readability */
+    font-size: 18px; /* Sets a comfortable font size */
+    
+    
+  }
+  .article-content img {
+    max-width: 100%; /* Ensures images are responsive */
+    height: auto; /* Maintains aspect ratio */
+    margin-bottom: 20px; /* Adds space below images */
+  }
+  .article-content h1, .article-content h2, .article-content h3 {
+    text-align: center; /* Centers headings */
+    margin: 20px 0; /* Adds space above and below headings */
+  }
+  .article-content ul {
+    list-style-type: disc; /* Default bullet points */
+    padding-left: 20px; /* Indentation for list items */
+    margin: 20px 0; /* Adds space above and below lists */
+  }
+  .article-content li {
+    margin-bottom: 10px; /* Adds space between list items */
+  }
+  .article-content a {
+    color: #ff6600; /* Orange color for links */
+    text-decoration: none; /* Removes underline */
+  }
+
+    .seperator {
+      width: 100%;
+      background-color: #ff6600;  
+    }
+

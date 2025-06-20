@@ -4,23 +4,45 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const jwt = require('jsonwebtoken');
-const morgan = require('morgan');
 const app = express();
 app.use(express.json());
 app.use(session({ secret: 'secret', resave: false, saveUninitialized: false }));
 const passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
-const db = require('../db/connection.js'); //! Връзка с базата данни
-const profileDataRoute = require('../profiledata.js');
+const path = require("path");
+const profileDataRoute = require(path.join(__dirname, '../profiledata.js'));
 var uname;
 var uid;
 
 app.use(cors({
   origin: "http://127.0.0.1:5500",
-  credentials: true 
+  credentials: true,
+  methods: ['GET', 'POST', 'DELETE', 'PUT', 'OPTIONS'], // Add DELETE here
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));  
 
+const db = mysql.createConnection({
+  host: process.env.DB_HOST || 'db', // Use environment variable
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASS || 'root',
+  database: process.env.DB_NAME || 'DRAGSTER',
+  port: process.env.DB_PORT || 3306,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
+
+
+
+
+//! Подай статични файлове
+app.use(express.static(path.join(__dirname, "../../")));
+
+//* Прерутирай връзката към началната страница
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../HTML/mainpage.html"));
+});
 
 //!Връзка със базата данни
 
@@ -318,6 +340,10 @@ app.get("/get-all-comments", (req, res) => {
 });
 //! Маршрут за изтриване на коментар
 app.delete("/delete-comment/:id", (req, res) => {
+  if (uname != "admin") {
+    return res.status(403).json({ message: "[ГРЕШКА] Нямате права за изтриване на коментари." });
+  }
+
   const commentId = req.params.id;
   const query = "DELETE FROM COMMENTS WHERE COMMENT_ID = ?";
   
@@ -342,7 +368,75 @@ app.get("/getusers", (req, res) => {
   });
 });
 
+//* Маршрут за създаване на коментар
+app.post("/create-comment", (req, res) => {
+  console.log("[ИНФО] Получена заявка:", {
+    comment: req.body.comment,
+    articleLink: req.body.articleLink
+  });
+  const { comment, articleLink } = req.body;
 
+  if (!comment || !articleLink) {
+    return res.status(400).json({ success: false, message: "[ГРЕШКА] Моля, попълнете всички полета." });
+  }
+
+  //& Вземане на потребителското име от сесията
+  const username = uname || "Гост";
+
+  //& Вземане на ID на статията по линка
+  db.query("SELECT article_id FROM NEWS WHERE link = ?", [articleLink], (err, results) => {
+    if (err || results.length === 0) {
+      return res.status(404).json({ success: false, message: "[ГРЕШКА] Статията не бе намерена." });
+    }
+
+    const articleId = results[0].article_id;
+
+    //& Вмъкване на коментара в базата данни
+    db.query("INSERT INTO COMMENTS (USERNAME, COMMENT, ARTICLE_ID) VALUES (?, ?, ?)", [username, comment, articleId], (err2) => {
+      if (err2) {
+        console.error("[ГРЕШКА] Грешка при вмъкване на коментар:", err2);
+        return res.status(500).json({ success: false, message: "[ГРЕШКА] Грешка при вмъкване на коментар." });
+      }
+
+      res.json({ success: true, message: "[УСПЕХ] Коментарът е изпратен успешно!" });
+    });
+  });
+})
+
+//? Маршрут за извеждане на всички новини
+app.get("/list-articles", (req, res) => {
+  const query = "SELECT * FROM NEWS ORDER BY created_at DESC";
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("[ГРЕШКА] Грешка при извеждането на новини:", err);
+      return res.status(500).json({ error: "[ГРЕШКА] Грешка с базата данни" });
+    }
+    res.json(results);
+  });
+});
+//* Маршрут за извеждане на коментари, за определен потребител
+app.post("/get-comments-by-user", (req, res) => {
+  const user = uname; // Using your session variable
+
+  const getCommentsQuery = `
+    SELECT c.COMMENT, n.title AS article_title, c.DATE_POSTED 
+    FROM COMMENTS c
+    LEFT JOIN NEWS n ON c.ARTICLE_ID = n.article_id
+    WHERE c.USERNAME = ? 
+    ORDER BY c.DATE_POSTED DESC
+  `;
+  
+  db.query(getCommentsQuery, [user], (err, comments) => {
+    if (err) {
+      console.error("Грешка при заявка за коментари:", err);
+      return res.status(500).json({ 
+        success: false,
+        error: "Вътрешна сървърна грешка" 
+      });
+    }
+    res.json(comments);
+  });
+});
 
 
 
